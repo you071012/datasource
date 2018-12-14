@@ -1,7 +1,9 @@
 package com.ukar.entity;
 
+
+import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -9,6 +11,8 @@ import java.io.Serializable;
  */
 @Table(name = "t_user")
 public class User implements Serializable{
+    @Id
+    @Column(name = "id")
     private Long id;
 
     private String name;
@@ -37,5 +41,14 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

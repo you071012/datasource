@@ -14,4 +14,12 @@ public interface UserService {
     List<User> selectAllUser();
 
     List<User> selectAllUserFromSlave();
+
+    User findById(long id);
+
+    /**
+     * 测试手动回滚
+     * @param user
+     */
+    void updateUser(User user);
 }
