@@ -25,4 +25,12 @@ public class UserServiceTest {
         User user2 = userService.findById(1);
         System.out.println(user2);
     }
+
+    @Test
+    public void testFindUser(){
+        for(int i = 0 ; i < 5 ; i++){
+            User user = userService.findById(1);
+            System.out.println(user);
+        }
+    }
 }

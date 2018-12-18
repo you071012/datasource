@@ -31,12 +31,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @DataSourceAnnotation(value = DataSourceEnum.Slave01)
+    @DataSourceAnnotation(value = DataSourceEnum.Slave)
     public List<User> selectAllUserFromSlave() {
         return userMapper.selectAll();
     }
 
     @Override
+    @DataSourceAnnotation(value = DataSourceEnum.Slave)
     public User findById(long id) {
         User user = userMapper.selectByPrimaryKey(id);
         return user;

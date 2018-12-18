@@ -9,8 +9,15 @@ public enum DataSourceEnum {
     //主库
     Master("master"),
 
+    //从库标识，用户轮询从库使用
+    Slave("slave"),
+
     //从库01
-    Slave01("slave01");
+    Slave01("slave01"),
+
+    //从库02
+    Slave02("slave02"),
+    ;
 
     private DataSourceEnum(String name) {
         this.name = name;

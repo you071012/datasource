@@ -44,14 +44,27 @@ public class DynamicDataSourceConfiguration {
     @Value("${jdbc.slave01.url}")
     private String slave01Url;
 
+    @Value("${jdbc.slave02.driver}")
+    private String slave02Driver;
+
+    @Value("${jdbc.slave02.username}")
+    private String slave02Username;
+
+    @Value("${jdbc.slave02.password}")
+    private String slave02Password;
+
+    @Value("${jdbc.slave02.url}")
+    private String slave02Url;
+
 
     @Bean
     public DataSource dynamicDataSource() {
         DynamicDataSource dataSource = new DynamicDataSource();
         dataSource.setDefaultTargetDataSource(dbMaster());
         Map<Object, Object> dataSourceMap = new HashMap<>(4);
-        dataSourceMap.put(DataSourceEnum.Master.getName(), dbMaster());
-        dataSourceMap.put(DataSourceEnum.Slave01.getName(), dbSlave01());
+        dataSourceMap.put(DataSourceEnum.Master.name(), dbMaster());
+        dataSourceMap.put(DataSourceEnum.Slave01.name(), dbSlave01());
+        dataSourceMap.put(DataSourceEnum.Slave02.name(), dbSlave02());
         dataSource.setTargetDataSources(dataSourceMap);
         return dataSource;
     }
@@ -81,4 +94,18 @@ public class DynamicDataSourceConfiguration {
         dataSource.setUrl(slave01Url);
         return dataSource;
     }
+
+    /**
+     * 读库1
+     * @return
+     */
+    private DataSource dbSlave02(){
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setDriverClassName(slave02Driver);
+        dataSource.setUsername(slave02Username);
+        dataSource.setPassword(slave02Password);
+        dataSource.setUrl(slave02Url);
+        return dataSource;
+    }
+
 }

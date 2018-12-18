@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-@Order(-9)//对于存在事物时配置，可以让该切点保证在事物执行之前执行
+@Order(-999)//对于存在事物时配置，可以让该切点保证在事物执行之前执行
 public class DataSourceAspect {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
     /**
@@ -30,7 +30,7 @@ public class DataSourceAspect {
     @Around("@annotation(dataSourceAnnotation)")
     public Object aroundMethod2(ProceedingJoinPoint point, DataSourceAnnotation dataSourceAnnotation ) throws Throwable{
         //切换目标数据源
-        String preDataSourcename = dataSourceAnnotation.value().getName();
+        String preDataSourcename = DateSourceTypeSingle.getSingle().getDataSourceEnum(dataSourceAnnotation.value());
         DataSourceContextHolder.setJdbcType(preDataSourcename);
 
         logger.info("方法[{}]切换数据源为 [{}]", point.getSignature(), dataSourceAnnotation.value());
@@ -43,9 +43,8 @@ public class DataSourceAspect {
             e.printStackTrace();
             throw e;
         } finally {
-            //恢复数据源
+            //恢复主数据源
             DataSourceContextHolder.setMaster();
-            logger.info("方法[{}]恢复数据源从[{}]>[{}]", point.getSignature(), preDataSourcename, dataSourceAnnotation.value());
         }
     }
 }
