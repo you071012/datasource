@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-@Order(-999)//对于存在事物时配置，可以让该切点保证在事物执行之前执行
+@Order(-999)
 public class DataSourceAspect {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
     /**

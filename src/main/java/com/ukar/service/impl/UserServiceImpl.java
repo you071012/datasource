@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-//    @DataSourceAnnotation(value = DataSourceEnum.Master)
+    @DataSourceAnnotation(value = DataSourceEnum.Master)
     public List<User> selectAllUser() {
         return userMapper.selectAll();
     }
@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
+    @DataSourceAnnotation(value = DataSourceEnum.Master)
     public void updateUser(User user) {
         try{
             Random random = new Random();
@@ -52,12 +53,16 @@ public class UserServiceImpl implements UserService {
             System.out.println(num);
             user.setPassword(user.getPassword() + num);
             userMapper.updateByPrimaryKeySelective(user);
-            int i = 1 / 0;
         }catch (Exception e){
             e.printStackTrace();
             //手动回滚
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
+    }
+
+    @Override
+    public String mockTest() {
+        return userMapper.mockTest();
     }
 }

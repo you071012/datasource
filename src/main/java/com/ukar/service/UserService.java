@@ -22,4 +22,6 @@ public interface UserService {
      * @param user
      */
     void updateUser(User user);
+
+    String mockTest();
 }
