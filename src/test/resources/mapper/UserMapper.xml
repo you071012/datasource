@@ -7,5 +7,18 @@
         SELECT * from t_user where name = #{name}
     </select>
 
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert into t_user
+        values
+        <foreach collection="list" item="user" separator=",">
+            (null, #{user.name}, #{user.password})
+        </foreach>
+        
+    </insert>
+
+    <select id="selectMap" resultType="java.util.HashMap">
+
+        select * from t_user
+    </select>
 
 </mapper>

@@ -3,9 +3,11 @@ package com.ukar.controller;
 import com.ukar.entity.User;
 import com.ukar.service.UserService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,5 +35,16 @@ public class DemoController {
     @RequestMapping("/selectAllUserFromSlave")
     public List<User> selectAllUserFromSlave(){
         return userService.selectAllUserFromSlave();
+    }
+
+    @RequestMapping("/testTime")
+    public Long testTime(@RequestParam(value = "num", defaultValue = "1",
+            required = false) String num){
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < Integer.valueOf(num) ;i++){
+            userService.findById(1L);
+        }
+        long end = System.currentTimeMillis();
+        return end - start;
     }
 }

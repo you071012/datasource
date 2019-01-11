@@ -8,6 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 // 获取启动类，加载配置，确定装载 Spring 程序的装载方法，它回去寻找 主配置启动类（被 @SpringBootApplication 注解的）
 @SpringBootTest(classes = DatasourceApplicationTests.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -28,8 +31,51 @@ public class UserServiceTest {
 
     @Test
     public void testFindUser(){
-        for(int i = 0 ; i < 5 ; i++){
-            System.out.println(userService.findById(1));
+
+//        System.out.println(userService.findById(1));
+        long start = System.currentTimeMillis();
+        for(int i = 0 ; i < 10 ; i++){
+            userService.findById(1);
+//            System.out.println(userService.findById(1));
         }
+        long end = System.currentTimeMillis();
+        System.out.println("共消耗时间毫秒值time=" + (end - start));
     }
+
+    @Test
+    public void testInsert(){
+        long start = System.currentTimeMillis();
+        for(int i = 0 ; i < 1000000; i++){
+            User user = new User();
+            user.setName("test" + i);
+            user.setPassword("123");
+            userService.insert(user);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("共消耗时间毫秒值time=" + (end - start));
+
+    }
+
+    @Test
+    public void testBatchInsert(){
+        List<User> list = new ArrayList<>();
+        long start = System.currentTimeMillis();
+        for(int i = 0 ; i < 1000000; i++){
+            User user = new User();
+            user.setName("batch" + i);
+            user.setPassword("123");
+            list.add(user);
+        }
+        userService.batchInsert(list);
+        long end = System.currentTimeMillis();
+        System.out.println("共消耗时间毫秒值time=" + (end - start));
+    }
+
+    @Test
+    public void testSelectMap(){
+        Map<String, List<User>> map = userService.selectMap();
+        System.out.println(map.size());
+    }
+
+
 }
