@@ -20,15 +20,17 @@ import org.springframework.stereotype.Component;
 @Order(-999)
 public class DataSourceAspect {
     private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
+
     /**
      * 注解类型切点,遇到该注解时会执行切面，切入方法
+     *
      * @param point
      * @param dataSourceAnnotation
      * @return
      * @throws Throwable
      */
     @Around("@annotation(dataSourceAnnotation)")
-    public Object aroundMethod2(ProceedingJoinPoint point, DataSourceAnnotation dataSourceAnnotation ) throws Throwable{
+    public Object aroundMethod2(ProceedingJoinPoint point, DataSourceAnnotation dataSourceAnnotation) throws Throwable {
         //切换目标数据源
         String preDataSourcename = DateSourceTypeSingle.getSingle().getDataSourceEnum(dataSourceAnnotation.value());
         DataSourceContextHolder.setJdbcType(preDataSourcename);
@@ -40,7 +42,6 @@ public class DataSourceAspect {
             return result;
         } catch (Throwable e) {
             logger.error("service方法调用发生错误: {}", e);
-            e.printStackTrace();
             throw e;
         } finally {
             //恢复主数据源

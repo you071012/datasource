@@ -30,7 +30,7 @@ public class MockUserServiceTest {
     private UserMapper userMapper;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         Mockito.when(userMapper.selectByPrimaryKey(1L)).thenReturn(new User(1L
                 , "zhangsan", "123456"));
@@ -38,7 +38,7 @@ public class MockUserServiceTest {
     }
 
     @Test
-    public void testFindUser(){
+    public void testFindUser() {
         User user = userService.findById(1L);
         Assert.assertEquals(user.getName(), "zhangsan");
         Assert.assertThat(user.getName(), IsSame.sameInstance("zhangsan"));
@@ -49,7 +49,7 @@ public class MockUserServiceTest {
      * when...thenReturn 和 doReturn...when区别
      */
     @Test
-    public void test(){
+    public void test() {
         List list1 = Mockito.mock(ArrayList.class);
         List list2 = Mockito.mock(ArrayList.class);
 
@@ -66,7 +66,7 @@ public class MockUserServiceTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String str;
-        while (true){
+        while (true) {
             str = scanner.next();
             str = str.replace("吗", "");
             str = str.replace("?", "!");

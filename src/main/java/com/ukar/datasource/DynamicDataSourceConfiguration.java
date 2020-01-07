@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by jyou on 2018/9/11.
  *
  * @author jyou
- *
+ * <p>
  * 配置数据库连接信息
  */
 @Configuration
@@ -71,9 +71,10 @@ public class DynamicDataSourceConfiguration {
 
     /**
      * 写库
+     *
      * @return
      */
-    private DataSource dbMaster(){
+    private DataSource dbMaster() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(masterDriver);
         dataSource.setUsername(masterUsername);
@@ -84,9 +85,10 @@ public class DynamicDataSourceConfiguration {
 
     /**
      * 读库1
+     *
      * @return
      */
-    private DataSource dbSlave01(){
+    private DataSource dbSlave01() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(slave01Driver);
         dataSource.setUsername(slave01Username);
@@ -97,9 +99,10 @@ public class DynamicDataSourceConfiguration {
 
     /**
      * 读库1
+     *
      * @return
      */
-    private DataSource dbSlave02(){
+    private DataSource dbSlave02() {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(slave02Driver);
         dataSource.setUsername(slave02Username);

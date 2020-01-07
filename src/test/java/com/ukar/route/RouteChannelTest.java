@@ -19,7 +19,7 @@ public class RouteChannelTest {
     private RouteHandle routeHandle;
 
     @Test
-    public void test(){
+    public void test() {
         routeHandle.doHandle(ChannelEnum.C);
     }
 }

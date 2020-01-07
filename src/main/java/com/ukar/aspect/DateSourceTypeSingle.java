@@ -28,18 +28,18 @@ public class DateSourceTypeSingle {
         initData();
     }
 
-    public static DateSourceTypeSingle getSingle(){
+    public static DateSourceTypeSingle getSingle() {
         return single;
     }
 
     /**
      * 初始化必须得参数
      */
-    private static void initData(){
+    private static void initData() {
         DataSourceEnum[] values = DataSourceEnum.values();
-        for(DataSourceEnum dataSourceEnum : values){
-            if(!DataSourceEnum.Master.equals(dataSourceEnum) &&
-                    !DataSourceEnum.Slave.equals(dataSourceEnum)){
+        for (DataSourceEnum dataSourceEnum : values) {
+            if (!DataSourceEnum.Master.equals(dataSourceEnum) &&
+                    !DataSourceEnum.Slave.equals(dataSourceEnum)) {
                 list.add(dataSourceEnum.name());
             }
         }
@@ -50,15 +50,16 @@ public class DateSourceTypeSingle {
 
     /**
      * 为防止并发 可以在上面加锁
+     *
      * @param dataSourceEnum
      * @return
      */
-    public String getDataSourceEnum(DataSourceEnum dataSourceEnum){
-        if(dataSourceEnum == DataSourceEnum.Master){
+    public String getDataSourceEnum(DataSourceEnum dataSourceEnum) {
+        if (dataSourceEnum == DataSourceEnum.Master) {
             return DataSourceEnum.Master.name();
         }
 
-        if(dataSourceEnum != null && dataSourceEnum != DataSourceEnum.Slave){
+        if (dataSourceEnum != null && dataSourceEnum != DataSourceEnum.Slave) {
             return dataSourceEnum.name();
         }
 

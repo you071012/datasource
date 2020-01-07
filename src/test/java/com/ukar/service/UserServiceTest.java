@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void testUpdate(){
+    public void testUpdate() {
         User user = userService.findById(1);
         System.out.println(user);
         userService.updateUser(user);
@@ -30,11 +31,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFindUser(){
+    public void testFindUser() {
 
 //        System.out.println(userService.findById(1));
         long start = System.currentTimeMillis();
-        for(int i = 0 ; i < 10 ; i++){
+        for (int i = 0; i < 10; i++) {
             userService.findById(1);
 //            System.out.println(userService.findById(1));
         }
@@ -43,9 +44,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testInsert(){
+    public void testInsert() {
         long start = System.currentTimeMillis();
-        for(int i = 0 ; i < 1000000; i++){
+        for (int i = 0; i < 1000000; i++) {
             User user = new User();
             user.setName("test" + i);
             user.setPassword("123");
@@ -57,25 +58,33 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testBatchInsert(){
+    public void testBatchInsert() {
         List<User> list = new ArrayList<>();
-        long start = System.currentTimeMillis();
-        for(int i = 0 ; i < 1000000; i++){
+        String str = "";
+        for (int i = 0; i < 200; i++) {
+            str += "你";
+        }
+        for (int i = 0; i < 1000000; i++) {
             User user = new User();
-            user.setName("batch" + i);
-            user.setPassword("123");
+            user.setName("batch" + str + i);
+            user.setPassword("password" + str + i);
             list.add(user);
         }
+
         userService.batchInsert(list);
-        long end = System.currentTimeMillis();
-        System.out.println("共消耗时间毫秒值time=" + (end - start));
+    }
+
+    private void run(List<User> list) {
+        Thread thread = new Thread(() -> userService.batchInsert(list));
+        thread.start();
     }
 
     @Test
-    public void testSelectMap(){
+    public void testSelectMap() {
         Map<String, List<User>> map = userService.selectMap();
         System.out.println(map.size());
-    }
 
+
+    }
 
 }

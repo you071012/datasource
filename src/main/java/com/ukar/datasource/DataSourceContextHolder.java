@@ -6,7 +6,7 @@ import com.ukar.enums.DataSourceEnum;
  * Created by jyou on 2018/9/11.
  *
  * @author jyou
- *
+ * <p>
  * 用来设置、获取数据源连接
  */
 public class DataSourceContextHolder {
@@ -27,7 +27,7 @@ public class DataSourceContextHolder {
 
     public static String getJdbcType() {
         String s = contextHolder.get();
-        if(s == null){
+        if (s == null) {
             s = DataSourceEnum.Master.getName();
         }
         return s;

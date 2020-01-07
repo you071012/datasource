@@ -21,7 +21,7 @@ import java.util.Properties;
 
 /**
  * Created by jyou on 2017/9/20.
- *
+ * <p>
  * mybatis 配置
  */
 @Configuration

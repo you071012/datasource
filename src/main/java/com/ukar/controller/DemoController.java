@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jyou on 2018/9/11.
@@ -23,25 +25,28 @@ public class DemoController {
     private UserService userService;
 
     @RequestMapping("/index")
-    public String index(){
-        return "OK";
+    public Map<String, String> index() {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "ukar");
+        map.put("age", "18");
+        return map;
     }
 
     @RequestMapping("/selectAllUser")
-    public List<User> selectAllUser(){
+    public List<User> selectAllUser() {
         return userService.selectAllUser();
     }
 
     @RequestMapping("/selectAllUserFromSlave")
-    public List<User> selectAllUserFromSlave(){
+    public List<User> selectAllUserFromSlave() {
         return userService.selectAllUserFromSlave();
     }
 
     @RequestMapping("/testTime")
     public Long testTime(@RequestParam(value = "num", defaultValue = "1",
-            required = false) String num){
+            required = false) String num) {
         long start = System.currentTimeMillis();
-        for(int i = 0; i < Integer.valueOf(num) ;i++){
+        for (int i = 0; i < Integer.valueOf(num); i++) {
             userService.findById(1L);
         }
         long end = System.currentTimeMillis();

@@ -20,6 +20,7 @@ public interface UserService {
 
     /**
      * 测试手动回滚
+     *
      * @param user
      */
     void updateUser(User user);
@@ -30,6 +31,7 @@ public interface UserService {
 
     /**
      * 批量插入
+     *
      * @param list
      */
     void batchInsert(List<User> list);
@@ -37,4 +39,8 @@ public interface UserService {
     void tr(User user);
 
     Map<String, List<User>> selectMap();
+
+    int masterInster(User user);
+
+    int slave01Inster(User user);
 }

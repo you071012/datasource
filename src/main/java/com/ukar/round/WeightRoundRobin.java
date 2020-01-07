@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * @author jia.you
  * @date 2018/12/18
- *
+ * <p>
  * 简单轮询和加权轮询算法
- *
+ * <p>
  * 考虑到并发情况，可以将此类设计为单例模式
  */
 public class WeightRoundRobin {
@@ -117,6 +117,7 @@ public class WeightRoundRobin {
      * 遍历全部节点，从最大的权重开始取。
      * 每次权重-公约数递减。
      * 如果当前权重《=0.则从循环从最大权重开始。
+     *
      * @return
      */
     public Server weightRound() {
@@ -126,13 +127,13 @@ public class WeightRoundRobin {
                 currentWeight = currentWeight - gcdWeight;
                 if (currentWeight <= 0) {
                     currentWeight = maxWeight;
-                    if(currentWeight == 0) {
+                    if (currentWeight == 0) {
                         return null;
                     }
                 }
             }
 
-            if(servers.get(currentIndex).getWeight() >= currentWeight) {
+            if (servers.get(currentIndex).getWeight() >= currentWeight) {
                 return servers.get(currentIndex);
             }
         }
@@ -140,7 +141,7 @@ public class WeightRoundRobin {
 
     public static void main(String[] args) {
         WeightRoundRobin w = new WeightRoundRobin();
-        for(int i = 0 ; i < w.totalServer * 2; i++){
+        for (int i = 0; i < w.totalServer * 2; i++) {
             Server server = w.normalRound();
             System.out.println(server);
         }

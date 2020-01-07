@@ -13,7 +13,7 @@
         <foreach collection="list" item="user" separator=",">
             (null, #{user.name}, #{user.password})
         </foreach>
-        
+
     </insert>
 
     <select id="selectMap" resultType="java.util.HashMap">

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = {"com.ukar.*"})
 public class DatasourceApplicationTests {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DatasourceApplicationTests.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(DatasourceApplicationTests.class, args);
+    }
 
 }

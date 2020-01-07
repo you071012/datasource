@@ -10,7 +10,7 @@ import java.io.Serializable;
  * Created by jyou on 2017/9/15.
  */
 @Table(name = "t_user")
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @Column(name = "id")
     private Long id;
@@ -18,6 +18,15 @@ public class User implements Serializable{
     private String name;
 
     private String password;
+
+    public User() {
+    }
+
+    public User(Long id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
 
     public Long getId() {
         return id;
@@ -51,4 +60,5 @@ public class User implements Serializable{
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }

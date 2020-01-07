@@ -15,9 +15,9 @@ public class RouteHandle {
     @Resource
     private ChannelFactory channelFactory;
 
-    public void doHandle(ChannelEnum channelEnum){
+    public void doHandle(ChannelEnum channelEnum) {
         BaseChannel channel = channelFactory.getChannel(channelEnum);
-        if(channel == null){
+        if (channel == null) {
             System.out.println("channel is null.....................");
             return;
         }

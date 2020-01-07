@@ -23,23 +23,23 @@ public class ChannelFactory {
     private ApplicationContext applicationContext;
 
     @PostConstruct
-    private void init(){
+    private void init() {
         Map<String, Object> beans =
                 applicationContext.getBeansWithAnnotation(ChannelAnno.class);
-        if(beans == null){
-           return;
+        if (beans == null) {
+            return;
         }
 
-        for(Map.Entry<String, Object> entry : beans.entrySet()){
+        for (Map.Entry<String, Object> entry : beans.entrySet()) {
             Object obj = entry.getValue();
-            if(obj instanceof BaseChannel){
+            if (obj instanceof BaseChannel) {
                 ChannelAnno annotation = obj.getClass().getAnnotation(ChannelAnno.class);
                 map.put(annotation.value(), (BaseChannel) obj);
             }
         }
     }
 
-    public BaseChannel getChannel(ChannelEnum channel){
+    public BaseChannel getChannel(ChannelEnum channel) {
         return map.get(channel);
     }
 }
